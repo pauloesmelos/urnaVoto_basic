@@ -1,8 +1,8 @@
- #include <stdio.h>
- #include <stdlib.h>
- #include <conio.h>
- #include <locale.h>
- 
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <locale.h>
+#include <string.h>
 #define TAM 50
 typedef struct{
  	char name[30];
@@ -18,9 +18,10 @@ char cabecalho(int tam){
 	}
 }
 int main(void){
- 	int qn,num,i,OP,high,a=0,b;
+ 	int qn,num,i,j,OP,high,a=0,b;
  	int cont=0,aux;
  	float percent;
+ 	char highName[20];
  	setlocale(LC_ALL,"");
 	
  	printf("Informe a quantidade de candidatos: ");
@@ -90,17 +91,19 @@ int main(void){
 			
 			case 4:
 				high = cand[0].x;
+				//strcpy(highName,cand[0].name);
 				//a=0;
 				b=0;
-				for(i = 0 ; i < cont ; ++i){
-					b = i + 1;
-						if(cand[b].x > high){
-							high = cand[b].x;
-							a++;
+				for(i=0;i<cont;++i){
+					for(j=i+1;j<cont;++j){
+						if(cand[j].x > high){
+							high = cand[j].x;
+							//highName = cand[j].name;
+							strcpy(highName,cand[j].name);
 						}
-				
+					}						
 				}
-				printf("Vencedor: %s %d voto[s]\n",cand[a].name,cand[a].x);
+				printf("Vencedor: %s %d voto[s]\n",highName,high);
 				system("pause");
 				OP = 5;
 			break;
